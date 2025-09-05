@@ -8,5 +8,5 @@ jobs:
     name: Release Pipieline\
     runs-on: windows-latest
     steps:
-      = name: Hello Pipeline
+      - name: Hello Pipeline
         run: echo "Hello Pipeline"
