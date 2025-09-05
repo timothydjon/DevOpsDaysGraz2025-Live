@@ -27,6 +27,12 @@ jobs:
       - name: copy template & help
         run: mkdir DevOpsDaysTasks\Templates && mkdir DevOpsDaysTasks\Help && cp workshop_material\Help.pdf DevOpsDaysTasks\Help\Help.pdf && cp workshop_material\default-tasks.xml DevOpsDaysTasks\Templates
 
+      -name: create certificate
+        run: |
+          $base64 = "${{ secrets.SIGN_CERTIFICATE }}"
+          $bytes = [System.Convert]::FromBase64String($base64)
+          [IO.File]::WriteAllBytes("workshop_material\devopsdays_tasks_codesign.pfx", $bytes)
+
       - name: sign exe
         run: .\scripts\sign.ps1 .\DevOpsDaysTasks\DevOpsDaysTasks.UI.exe -PfxFile .\workshop_material\devopsdays_tasks_codesign.pfx -PfxPassword Password
 
