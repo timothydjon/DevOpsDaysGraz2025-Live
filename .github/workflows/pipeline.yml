@@ -21,5 +21,8 @@ jobs:
       - name: Run integration tests
         run: dotnet test .\src\DevOpsDaysTasks.IntegrationTests
 
-      - name: Hello Pipeline
-        run: echo "Hello Pipeline"
+      - name: Publish Build
+        run: dotnet publish -c Release src\DevOpsDaysTasks.UI\ -o DevOpsDaysTasks /p:Version=dude /p:VersionName=dude
+
+      - name: copy template & help
+        run: mkdir DevOpsDaysTasks\Templates && mkdir DevOpsDaysTasks\Help && cp workshop_material\Help.pdf DevOpsDaysTasks\Help\Help.pdf && cp workshop_material\default-tasks.xml DevOpsDaysTasks\Templates
