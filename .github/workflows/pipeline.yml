@@ -22,7 +22,7 @@ jobs:
         run: dotnet test .\src\DevOpsDaysTasks.IntegrationTests
 
       - name: Publish Build
-        run: dotnet publish -c Release src\DevOpsDaysTasks.UI\ -o DevOpsDaysTasks /p:Version=dude /p:VersionName=dude
+        run: dotnet publish -c Release src\DevOpsDaysTasks.UI\ -o DevOpsDaysTasks /p:Version='1.0.0' /p:VersionName='1.0.0'
 
       - name: copy template & help
         run: mkdir DevOpsDaysTasks\Templates && mkdir DevOpsDaysTasks\Help && cp workshop_material\Help.pdf DevOpsDaysTasks\Help\Help.pdf && cp workshop_material\default-tasks.xml DevOpsDaysTasks\Templates
