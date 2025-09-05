@@ -2,6 +2,12 @@ name: Release Pipeline
 
 on:
   push: {}
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version"
+        required: true
+        type: string
 
 jobs:
   release-pipeline:
@@ -24,7 +30,9 @@ jobs:
         run: dotnet test .\src\DevOpsDaysTasks.IntegrationTests
 
       - name: Publish Build
-        run: dotnet publish -c Release src\DevOpsDaysTasks.UI\ -o DevOpsDaysTasks /p:Version='1.0.0' /p:VersionName='1.0.0'
+        env:
+          VERSION: ${{ inputs.version || '0.0.0' }}
+        run: dotnet publish -c Release src\DevOpsDaysTasks.UI\ -o DevOpsDaysTasks /p:Version=${{ env.VERSION }} /p:VersionName='dude'
 
       - name: get external files
         uses: actions/checkout@v4
